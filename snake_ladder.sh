@@ -6,5 +6,11 @@ echo "Hello!! $username"
 winning_pos=100
 starting_pos=0
 
+# function to roll the dice randomly
+function Diceroll(){
+		on_dice=$(( RANDOM % 6 + 1 ))
+		echo $on_dice
+		}
+
 
 
