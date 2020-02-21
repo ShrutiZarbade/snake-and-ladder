@@ -13,9 +13,10 @@ function Diceroll(){
 		on_dice=$(( RANDOM % 6 + 1 ))
 		echo $on_dice
 		}
+
 # function to choice the option between no play,ladder and snake.
 function Tocheck_option(){
-		while [[ $current_pos -le  $winning_pos ]]
+		while [[ $current_pos -ne  $winning_pos ]]
 		do
 			option=$(( RANDOM % 3 ))
 			case $option in
@@ -24,7 +25,10 @@ function Tocheck_option(){
 
 				1)
 					current_pos=$(( $current_pos + $on_dice ))
-					# player position will move ahead by no comes in Diceroll
+					if [[ $current_pos -gt $winning_pos ]]
+					then
+						current_pos=$(( $current_pos - $on_dice ))
+					fi
 					;;
 
 				2)
@@ -40,5 +44,6 @@ function Tocheck_option(){
 		done
 		echo $current_pos
 	}
+
 
 
