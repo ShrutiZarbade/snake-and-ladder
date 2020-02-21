@@ -12,6 +12,7 @@ current_pos=0
 function Diceroll(){
 		on_dice=$(( RANDOM % 6 + 1 ))
 		echo $on_dice
+		(( dierollcount++ ))
 		}
 
 # function to choice the option between no play,ladder and snake.
@@ -23,7 +24,7 @@ function Tocheck_option(){
 				0)
 					current_pos=$current_pos ;;  # 0 is for no play
 
-				1)
+				1) Diceroll
 					current_pos=$(( $current_pos + $on_dice ))
 					if [[ $current_pos -gt $winning_pos ]]
 					then
@@ -31,19 +32,18 @@ function Tocheck_option(){
 					fi
 					;;
 
-				2)
+				2)Diceroll
 					current_pos=$(( $current_pos - $on_dice ))
+					if [[ $current_pos -lt 0 ]]
+					then
+						current_pos=0
+					fi
 					# Player pos will move behind by the num comes on diceroll
 					;;
 			esac
-
-			if [ $current_pos -lt 0 ]
-			then
-				current_pos=0
-			fi
 		done
 		echo $current_pos
 	}
-
+echo $dierollcount
 
 
